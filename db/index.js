@@ -44,19 +44,18 @@ class DB {
     return this.connection.query(query_string);
   }
 
-  // search category and item_name column for any matching text to the
-  // given search_term string.
-  search_auctions(search_term) {
-    const value = `%${search_term}%`;
+  viewAll_depts() {
     const query_string =
-      'SELECT auctions.id AS id, item_name, category, starting_bid, highest_bid, seller_id, highest_bidder_id, users.username AS highest_bidder FROM auctions LEFT JOIN users ON auctions.highest_bidder_id = users.id WHERE item_name LIKE ? OR category LIKE ?';
-    return this.connection.query(query_string, [value, value]);
+      `SELECT name as 'Department'
+      FROM department`;
+    return this.connection.query(query_string);
   }
 
-  find_auctions(criteria) {
+  viewAll_roles() {
     const query_string =
-      'SELECT auctions.id AS id, item_name, category, starting_bid, highest_bid, seller_id, highest_bidder_id, users.username AS highest_bidder FROM auctions LEFT JOIN users ON auctions.highest_bidder_id = users.id WHERE ? ';
-    return this.connection.query(query_string, criteria);
+    `SELECT title as 'Roles'
+    FROM role`;
+    return this.connection.query(query_string);
   }
 
   create_auction(new_auction) {

@@ -25,8 +25,18 @@ class DB {
     return this.connection.end(callback);
   }
 
-  all_auctions() {
-    const query_string = 'SELECT * FROM auctions';
+  viewAll_emps() {
+    const query_string =
+    `SELECT concat(first_name,' ',last_name) as 'Employee',
+    role.title as 'Title',
+    department.name as 'Department'
+    FROM employee
+    LEFT JOIN role
+    ON employee.role_id = role.id
+    LEFT JOIN department
+    ON role.department_id = department.id
+    ORDER BY Department;
+    `;
     return this.connection.query(query_string);
   }
 

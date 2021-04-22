@@ -1,5 +1,5 @@
-CREATE DATABASE employee_DB;
-USE employee_DB;
+CREATE DATABASE company_DB;
+USE company_DB;
 
 CREATE TABLE department(
 	id INT AUTO_INCREMENT NOT NULL,
@@ -11,16 +11,16 @@ CREATE TABLE role(
     id INT AUTO_INCREMENT NOT NULL,
     title VARCHAR(50),
     salary INTEGER,
+    department_id INTEGER,
     PRIMARY KEY(id),
     FOREIGN KEY(department_id) REFERENCES department(id)
-)
+);
 
-CREATE TABLE employee (
+CREATE TABLE employee(
 	id INT AUTO_INCREMENT NOT NULL,
 	first_name VARCHAR(50) NOT NULL,
 	last_name VARCHAR(50) NOT NULL,
     role_id INT,
-	department_id INT,
     manager_id INT,
 	PRIMARY KEY(id),
 	FOREIGN KEY(role_id) REFERENCES role(id),

@@ -28,8 +28,9 @@ class DB {
   viewAll_emps() {
     const query_string =
     `SELECT concat(first_name,' ',last_name) as 'Employee',
-    role.title as 'Title',
-    department.name as 'Department'
+    role.title AS 'Title',
+    department.name AS 'Department',
+    role.salary AS 'Salary'
     FROM employee
     LEFT JOIN role
     ON employee.role_id = role.id

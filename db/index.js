@@ -27,15 +27,18 @@ class DB {
 
   viewAll_emps() {
     const query_string =
-    `SELECT concat(first_name,' ',last_name) as 'Employee',
+    `SELECT concat(emp.first_name,' ',emp.last_name) as 'Employee',
     role.title AS 'Title',
     department.name AS 'Department',
-    role.salary AS 'Salary'
-    FROM employee
+    role.salary AS 'Salary',
+    concat(mgr.first_name,' ',mgr.last_name) as 'Manager'
+    FROM employee AS emp
     LEFT JOIN role
-    ON employee.role_id = role.id
+    ON emp.role_id = role.id
     LEFT JOIN department
     ON role.department_id = department.id
+    LEFT JOIN employee AS mgr
+    ON emp.manager_id = mgr.id
     ORDER BY Department;
     `;
     return this.connection.query(query_string);
